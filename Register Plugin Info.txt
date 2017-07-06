@@ -1,0 +1,24 @@
+Class : CopyNoteOnLeadQualify
+
+Message               : QualifyLead
+Entity                : lead
+Run In User's Context : Admin
+Event Pipeline Stage  : Post-Operation
+Execution Mode        : Synchronous ( Mandatory )
+
+Class : CopyNoteOnOpportunityWon
+
+Message               : Win
+Entity                : Opportunity
+Run In User's Context : Admin
+Event Pipeline Stage  : Post-Operation
+Execution Mode        : Synchronous/Asynchronous
+
+
+Class : CopyNoteOnOpportunityWon
+
+Message               : Lose
+Entity                : Opportunity
+Run In User's Context : Admin
+Event Pipeline Stage  : Post-Operation
+Execution Mode        : Synchronous/Asynchronous

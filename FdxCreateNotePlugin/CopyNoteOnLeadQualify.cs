@@ -25,7 +25,7 @@ namespace FdxCreateNotePlugin
                 IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
 
                 EntityReference lead = (EntityReference)context.InputParameters["LeadId"];
-                
+
                 int step = 1;
                 if (lead.LogicalName != "lead")
                     return;
@@ -105,9 +105,9 @@ namespace FdxCreateNotePlugin
                             #region Query Lead for Parent Account and Contact(If Exists)
                             step = 8;
                             Entity leadSet = new Entity();
-                            QueryExpression queryLead= new QueryExpression();
+                            QueryExpression queryLead = new QueryExpression();
                             queryLead.EntityName = "lead";
-                            queryLead.ColumnSet = new ColumnSet("parentaccountid","parentcontactid");
+                            queryLead.ColumnSet = new ColumnSet("parentaccountid", "parentcontactid");
                             queryLead.Criteria.AddCondition("leadid", ConditionOperator.Equal, lead.Id);
 
                             step = 9;
@@ -136,7 +136,7 @@ namespace FdxCreateNotePlugin
                                     {
                                         step = 906;
                                         Entity account = service.Retrieve(crEntities.LogicalName, crEntities.Id
-                                            , new ColumnSet("accountid","name","originatingleadid"));
+                                            , new ColumnSet("accountid", "name", "originatingleadid"));
                                         step = 907;
                                         newNote.Attributes["objectid"] = new EntityReference(account.LogicalName, account.Id);
                                         step = 908;
@@ -207,7 +207,7 @@ namespace FdxCreateNotePlugin
 
                                         QueryExpression queryAnnotation = new QueryExpression();
                                         queryAnnotation.EntityName = "annotation";
-                                        queryAnnotation.ColumnSet = new ColumnSet("createdon","objectid","objecttypecode");
+                                        queryAnnotation.ColumnSet = new ColumnSet("createdon", "objectid", "objecttypecode");
                                         queryAnnotation.Criteria.AddCondition("annotationid", ConditionOperator.Equal, annotationid);
 
                                         step = 117;
@@ -234,11 +234,11 @@ namespace FdxCreateNotePlugin
                     }
                     #endregion
                 }
-                catch(FaultException<OrganizationServiceFault> ex )
+                catch (FaultException<OrganizationServiceFault> ex)
                 {
                     throw new InvalidPluginExecutionException(string.Format("Plugin Error: " + ex.Message + ". Exception occurred at step = {0}.", step));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw new InvalidPluginExecutionException(string.Format("Plugin Error: " + ex.Message + ". Exception occurred at step = {0}.", step));
                 }

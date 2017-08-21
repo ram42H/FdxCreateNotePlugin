@@ -39,7 +39,7 @@ namespace FdxCreateNotePlugin
                     QueryExpression opportunityQuery = new QueryExpression();
                     opportunityQuery.EntityName = "opportunity";
                     opportunityQuery.ColumnSet = new ColumnSet("fdx_notescopiedontimestamp", "parentaccountid", "parentcontactid", "createdon");
-                    opportunityQuery.Criteria.AddCondition("opportunityid",ConditionOperator.Equal, ((EntityReference)opportunity.Attributes["opportunityid"]).Id);
+                    opportunityQuery.Criteria.AddCondition("opportunityid", ConditionOperator.Equal, ((EntityReference)opportunity.Attributes["opportunityid"]).Id);
 
                     Entity opportunitySet = (Entity)service.RetrieveMultiple(opportunityQuery).Entities[0];
 
@@ -60,7 +60,7 @@ namespace FdxCreateNotePlugin
                         {
                             queryNote.Criteria.AddCondition("createdon", ConditionOperator.GreaterThan, (DateTime)opportunitySet.Attributes["fdx_notescopiedontimestamp"]);
                         }
-                        else if(opportunitySet.Attributes.Contains("createdon"))
+                        else if (opportunitySet.Attributes.Contains("createdon"))
                         {
                             queryNote.Criteria.AddCondition("createdon", ConditionOperator.GreaterThan, (DateTime)opportunitySet.Attributes["createdon"]);
                         }
